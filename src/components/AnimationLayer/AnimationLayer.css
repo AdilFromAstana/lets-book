@@ -1,0 +1,29 @@
+/* AnimationLayer.css */
+.layer {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0);
+    z-index: 9999;
+    transform: translateY(-100%); /* Начинаем с позиции выше экрана */
+    transition: transform 0.5s ease;
+  }
+  
+  .layer-enter {
+    transform: translateY(-100%); /* Начало анимации — слой выше экрана */
+  }
+  
+  .layer-enter-active {
+    transform: translateY(0); /* Окончательное положение — слой на экране */
+  }
+  
+  .layer-exit {
+    transform: translateY(0); /* Оставляем слой на экране */
+  }
+  
+  .layer-exit-active {
+    transform: translateY(100%); /* Анимация уходит вниз */
+  }
+  
