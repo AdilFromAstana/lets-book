@@ -1,4 +1,4 @@
-import { FC, useRef } from "react";
+import { useRef } from "react";
 import { CSSTransition } from "react-transition-group";
 import "./AnimationLayer.css";
 
@@ -6,7 +6,7 @@ interface AnimationLayerProps {
   inProp: boolean;
 }
 
-const AnimationLayer: FC<AnimationLayerProps> = ({ inProp }) => {
+const AnimationLayer: React.FC<AnimationLayerProps> = ({ inProp }) => {
   const nodeRef = useRef<HTMLDivElement>(null);
 
   return (
