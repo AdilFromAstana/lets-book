@@ -6,7 +6,7 @@ import {
 } from "@ant-design/icons";
 import { useNavigate } from "react-router-dom";
 
-const { Title, Paragraph, Text } = Typography;
+const { Title, Paragraph } = Typography;
 
 const features = [
   "Изолированные VIP‑кабины (1–6 игроков)",

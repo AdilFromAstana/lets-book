@@ -6,44 +6,86 @@ import dayjs from "dayjs";
 
 const { Text } = Typography;
 
+// Определяем типы для данных заказа
+type Computer = {
+  number: string;
+  price: number;
+  time: string;
+};
+
+type OrderStatus = "paid" | "cancelled" | "active";
+
+type Order = {
+  id: number;
+  status: OrderStatus;
+  selectedTime: string | Date;
+  totalPrice: number;
+  computers: Computer[];
+};
+
+const statusText: Record<OrderStatus, string> = {
+  paid: "Оплачен",
+  cancelled: "Отменен",
+  active: "Активен",
+};
+
+const statusColor: Record<OrderStatus, string> = {
+  paid: "green",
+  cancelled: "red",
+  active: "blue",
+};
+
+const isOrderArray = (data: unknown): data is Order[] => {
+  return (
+    Array.isArray(data) &&
+    data.every(
+      (item) =>
+        typeof item.id === "number" &&
+        ["paid", "cancelled", "active"].includes(item.status) &&
+        typeof item.totalPrice === "number" &&
+        Array.isArray(item.computers)
+    )
+  );
+};
+
 const OrderDetailPage = () => {
-  const { id } = useParams();
-  const [order, setOrder] = useState(null);
+  const { id } = useParams<{ id: string }>() as { id: string };
+  const [order, setOrder] = useState<Order | null>(null);
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
+  const loadOrder = () => {
+    setLoading(true);
+    try {
+      const ordersData = localStorage.getItem("orders");
+      const parsedData = ordersData ? JSON.parse(ordersData) : [];
+      const savedOrders: Order[] = isOrderArray(parsedData) ? parsedData : [];
+      const foundOrder = savedOrders.find((o) => o.id.toString() === id);
+
+      setTimeout(() => {
+        if (foundOrder) {
+          setOrder(foundOrder);
+        } else {
+          navigate("/orders");
+        }
+        setLoading(false);
+      }, 300);
+    } catch (error) {
+      console.error("Failed to load order", error);
+      setLoading(false);
+      navigate("/orders");
+    }
+  };
+
   useEffect(() => {
+    if (!id) {
+      navigate("/orders");
+      return;
+    }
     loadOrder();
   }, [id]);
 
-  const loadOrder = () => {
-    setLoading(true);
-    const savedOrders = JSON.parse(localStorage.getItem("orders")) || [];
-    const foundOrder = savedOrders.find((o) => o.id.toString() === id);
-
-    setTimeout(() => {
-      if (foundOrder) {
-        setOrder(foundOrder);
-      } else {
-        navigate("/orders");
-      }
-      setLoading(false);
-    }, 300);
-  };
-
   if (!order) return <div>Загрузка...</div>;
-
-  const statusText = {
-    paid: "Оплачен",
-    cancelled: "Отменен",
-    active: "Активен",
-  };
-
-  const statusColor = {
-    paid: "green",
-    cancelled: "red",
-    active: "blue",
-  };
 
   return (
     <div

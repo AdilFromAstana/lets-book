@@ -10,7 +10,7 @@ import "./App.css";
 import MainPage from "./components/Projects/MainPage";
 import OrdersPage from "./components/OrdersPage/OrdersPage";
 import OrderDetailPage from "./components/OrderDetailPage/OrderDetailPage";
-import { Layout, Typography, Button, Drawer, Menu } from "antd";
+import { Layout, Button, Drawer, Menu } from "antd";
 import {
   MenuOutlined,
   HomeOutlined,
@@ -20,26 +20,11 @@ import AnimationLayer from "./components/AnimationLayer/AnimationLayer";
 import Home from "./components/Home/Home";
 
 const { Header, Content } = Layout;
-const { Title } = Typography;
 
 const AppHeader = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const [drawerVisible, setDrawerVisible] = useState(false);
-
-  const getHeaderTitle = () => {
-    switch (location.pathname) {
-      case "/orders":
-        return "Мои заказы";
-      case "/":
-        return "Главная";
-      default:
-        if (location.pathname.startsWith("/orders/")) {
-          return "Детали заказа";
-        }
-        return "CyberClub";
-    }
-  };
 
   const menuItems = [
     {
@@ -74,9 +59,6 @@ const AppHeader = () => {
           justifyContent: "space-between",
         }}
       >
-        {/* <Title level={4} style={{ margin: 0 }}>
-          {getHeaderTitle()}
-        </Title> */}
         <img src="/logo.svg" alt="logo" width="140" />
 
         <Button
@@ -115,7 +97,7 @@ const App = () => {
   return (
     <Layout style={{ background: "white", height: "100%" }}>
       <AppHeader />
-      <Content style={{ display: "flex" }}>
+      <Content style={{ display: "flex", minHeight: "initial" }}>
         <AnimationLayer inProp={animationIn} />
         <Routes>
           <Route path="/" index element={<Home />} />
