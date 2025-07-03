@@ -10,14 +10,14 @@ interface PC {
   // добавьте другие свойства ПК, если они есть
 }
 
-interface Service {
-  id: string | number;
-  title: string;
-  price: string;
-  isAlwaysAvailable: boolean;
-  availableStartTime?: string;
-  availableEndTime?: string;
-}
+// interface Service {
+//   id: string | number;
+//   title: string;
+//   price: string;
+//   isAlwaysAvailable: boolean;
+//   availableStartTime?: string;
+//   availableEndTime?: string;
+// }
 
 interface BookingInfoCardProps {
   selectedTime: string | null;

@@ -1,8 +1,12 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect, type ReactNode } from "react";
 import { useLocation } from "react-router-dom";
-import "./TransitionEffect.css"; // подключаем стили
+import "./TransitionEffect.css";
 
-const TransitionEffect = ({ children }) => {
+interface TransitionEffectProps {
+  children: ReactNode;
+}
+
+const TransitionEffect: React.FC<TransitionEffectProps> = ({ children }) => {
   const [isAnimating, setIsAnimating] = useState(false);
   const location = useLocation();
 

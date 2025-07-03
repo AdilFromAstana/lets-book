@@ -24,7 +24,6 @@ interface PCModalInfoProps {
 }
 
 const PCModalInfo: React.FC<PCModalInfoProps> = ({
-  currentPC,
   relevantSession,
   unavailable,
   onNext,

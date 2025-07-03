@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Input, Modal, Collapse, Button } from "antd";
-import dayjs, { Dayjs } from "dayjs";
+import dayjs from "dayjs";
 
 const { Panel } = Collapse;
 

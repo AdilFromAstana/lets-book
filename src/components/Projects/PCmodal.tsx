@@ -42,9 +42,7 @@ const PCmodal: React.FC<PCmodalProps> = ({
   isSeatModalOpen,
   setIsSeatModalOpen,
   relevantSession,
-  selectedPCsessions,
   setSelectedPCs,
-  selectedPCs,
 }) => {
   const [step, setStep] = useState<number>(1);
   const selected = dayjs(selectedTime);
